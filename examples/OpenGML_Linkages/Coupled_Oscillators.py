@@ -6,8 +6,9 @@
 # License: BSD-3-Clause License
 # Organisation: OpenGML.org/
 # Project: https://github.com/Electro-resonance/OpenGML
-# Description: Phase Locking Oscillators
-# Example of oscillators that phase lock
+# Description: Fractal Linkages
+# Example of nested coupled oscillators using linkages as "phase coupled forces".
+# The linkages are assigned using a recursive algorithm.
 # =============================================================================
 import sys
 sys.path.append("../../src/OpenGML")  # AddOpenGML path
@@ -17,33 +18,9 @@ from GML import *
 from GML_3D import *
 from GML_Bond import GML_Bond
 from colour_functions import * #RGB definitions of Colours
+from prime_functions import * #Prime number functions
 from gl_text_drawing import *
 import random
-
-
-def generate_primes(n):
-    """
-    Generates primes in the set from 2 to n
-    :param n:
-    :return:
-    """
-    primes = []
-    for num in range(2, n):
-        for i in range(2, num):
-            if (num % i) == 0:
-                break
-        else:
-            primes.append(num)
-    return primes
-
-def gcd(a, b):
-    """
-    Returns the greatest common divisor of two integers a and b.
-    """
-    while b != 0:
-        a, b = b, a % b
-    return a
-
 
 def recursive_bonds(singularities, depth, prob=0.5, coupling=0.01):
     """
@@ -85,7 +62,7 @@ def populate_demo(demo_num=0):
 
     colors = [RED, ORANGE, INDIGO, VIOLET, YELLOW]
 
-    primes=generate_primes(20)
+    primes=generate_primes(70)
     #print(primes)
     #print (gcd(10,25))
 
@@ -95,23 +72,14 @@ def populate_demo(demo_num=0):
     singularities = []
     # create singularities with frequencies based on prime numbers
     for i in range(len(primes)):
-        frequency = primes[i]+80
+        frequency = primes[i]
         # Add a single point to the root node
-        offset_angle = random.randint(-180, 180)
-        singularity=rootNode.add_singularity(offset_angle, diameter, frequency*freq_mult+50, DARK_GREY)
+        singularity=rootNode.add_singularity(0, diameter, frequency*freq_mult+30, DARK_GREY)
         singularities.append(singularity[0])
         color = colors[random.randint(0,len(colors)-1)]
-        offset_angle=random.randint(-180,180)
-        corners = singularity[0].add_triangle(offset_angle, diameter, frequency * freq_mult/2, color)
+        corners = singularity[0].add_triangle(0, diameter, frequency * freq_mult/2, color)
         for corner in corners:
             singularities.append(corner)
-            offset_angle = random.randint(-180, 180)
-            corners2=corner.add_square(offset_angle, diameter, frequency * freq_mult/4, color)
-            for corner2 in corners2:
-                singularities.append(corner2)
-                #corners3 = corner2.add_triangle(0, diameter, frequency * freq_mult / 4, color)
-                #for corner3 in corners3:
-                #    singularities.append(corner3)
 
     # Create recursive connections between the singularities
     bonds=recursive_bonds(singularities, 1, prob=0.5, coupling=0.0002)
@@ -158,7 +126,7 @@ def runtime_callback(rootNode):
 
 if __name__ == '__main__':
     # Run the app
-    app = app2d.GML_App_2D("Phase Locking Oscillators", populate_demo, sonic_enabled=False)
+    app = app2d.GML_App_2D("Coupled Oscillators", populate_demo, sonic_enabled=False)
     app.initial_rotation_speed(0.3)
     app.balancing_phases(False)
     app.mode_2d=2

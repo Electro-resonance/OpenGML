@@ -32,13 +32,14 @@ class GML_Bond:
     """
     A class to represent a bond between two singularities in OpenGML.
     """
-    def __init__(self, singularity1, singularity2, phase_offset=0.0, coupling=0.1, color=BLACK, thickness=1):
+    def __init__(self, singularity1, singularity2, phase_offset=0.0, coupling=0.1, lock_frequency=False, color=BLACK, thickness=1):
         self.singularity1 = singularity1
         self.singularity2 = singularity2
         self.phase_offset = phase_offset
         self.coupling = coupling
         self.color = color
         self.thickness = thickness
+        self.lock_frequency = lock_frequency
 
     def update(self, dt=0):
         phase1=self.singularity1.phase[0]
@@ -49,6 +50,12 @@ class GML_Bond:
         phase_diff = phase1 - phase2 + self.phase_offset
 
         phase_diff -= 360
+
+        if (self.lock_frequency==True):
+            # Calculate the frequency difference between the two singularities
+            freq_diff = self.singularity1.freq[0] - self.singularity2.freq[0]
+            phase_diff+=freq_diff*360
+
         coupled_phase=self.coupling * phase_diff
         #print("phase_diff=",phase_diff," coupled=",coupled_phase)
 
