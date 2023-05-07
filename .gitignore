@@ -1,3 +1,13 @@
+#Specific to OpenGML
+/3rdParty/*
+!/3rdParty
+!/3rdParty/README.md
+/experiments
+/freq_data
+/venv
+/src/NanoBrain
+/.idea
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
