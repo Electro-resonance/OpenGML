@@ -12,9 +12,11 @@ from random import randint
 
 BLACK = (0, 0, 0)
 WHITE = [255, 255, 255]
+GREY = [127, 127, 127]
 GREY1 = [127, 127, 127]
 GREY2 = [155, 155, 155]
 GREY3 = (200, 200, 200)
+DARK_GREY = (50, 50, 50)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
