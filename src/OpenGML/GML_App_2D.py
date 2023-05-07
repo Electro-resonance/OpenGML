@@ -80,6 +80,10 @@ class GML_App_2D(App):
         self.redraw=False
         self.demo_num_callback=None
         GML_graphics_helper().key_pressed('h') #Trigger help menu
+        self.key_callback=None
+        self.last_key_press=Clock.get_time()
+        self.dt_key_press=0
+        self.runtime_callback=None
 
     def on_window_resize(self, window, width, height):
         """
@@ -142,6 +146,12 @@ class GML_App_2D(App):
     def add_demo_num_callback(self,demo_num_callback):
         self.demo_num_callback=demo_num_callback
 
+    def add_key_callback(self,key_callback):
+        self.key_callback=key_callback
+
+    def add_runtime_callback(self,runtime_callback):
+        self.runtime_callback = runtime_callback
+
     def build(self):
         Window.bind(on_resize=self.on_window_resize)
         Clock.schedule_interval(self.update, 0.01 / 60.0)
@@ -183,6 +193,10 @@ class GML_App_2D(App):
     def _on_keyboard_down(self, keyboard, keycode, text, modifiers):
 
         self.redraw = False
+
+        current_time = Clock.get_time()
+        self.dt_key_press = current_time - self.last_key_press
+        self.last_key_press = current_time
 
         #if keycode[1] == 'k':
         #    glTranslatef(0, 0, 0.1)
@@ -263,6 +277,8 @@ class GML_App_2D(App):
             self.tempo -= 1
 
         GML_graphics_helper().key_pressed(keycode[1])
+        if(self.key_callback is not None):
+            self.key_callback(keycode[1],self.dt_key_press)
 
         if (self.redraw == True):
             # Create the GML tree
@@ -332,6 +348,9 @@ class GML_App_2D(App):
         if (self.sonic_enabled == True):
             self.text1.drawText(self.button1.canvas, 40, 450,"Tempo: "+str(int(self.tempo)), 18)
             self.sonic.drawText(self.text1, self.button1.canvas, 470, x=40)
+
+        if(self.runtime_callback is not None):
+            self.runtime_callback(self.rootNode)
 
         return self.button1
 

@@ -22,6 +22,7 @@ from pygame_functions import PygameGraphicsHelper
 import trig_tables as trig
 from colour_functions import *
 from euclidean_functions import euclidean_bjorklund,euclidean_form_string,euclidean_rhythm_string
+import GML_Bond
 
 
 def GML_init():
@@ -56,6 +57,7 @@ class GMLBaseClass(object):
     oscillator_speed = 1
     graphics_helper = BlitGraphicsHelper()
     mode_3d=False
+    bonds=[]
 
     def set_reverse(self, rev):
         """
@@ -118,6 +120,37 @@ class GMLBaseClass(object):
             self.draw_mode = 0
         if(rootGML != None):
             rootGML.set_draw_mode(self.draw_mode)
+
+    def add_bond(self, singularity1, singularity2, color=BLACK, thickness=1):
+        """
+        Adds a bond between two singularities.
+        :param s1: The first singularity.
+        :param s2: The second singularity.
+        :param color: The color of the bond.
+        :param thickness: The thickness of the bond.
+        """
+        bond = Bond(singularity1, singularity2, color, thickness)
+        self.bonds.append(bond)
+
+    def apply_phase_offset(self, offset, offset_vector):
+        """
+        Prototype to add phase offset
+        :param offset:
+        :return:
+        """
+        return
+
+    def apply_force(self, force_vector, dt):
+        """
+        Applies a force vector to a singularity in OpenGML.
+        """
+        if isinstance(force_vector, list):
+            # Calculate the magnitude of the force vector
+            force_magnitude = math.sqrt(force_vector[0] ** 2 + force_vector[1] ** 2 + force_vector[2] ** 2)
+        else:
+            force_magnitude = force_vector
+            # Apply the force to the singularity
+        self.apply_phase_offset(force_magnitude, force_vector)
 
 id_base=0
 
@@ -204,6 +237,18 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
         self.phase[0] = phase
         self.start_phase[0] = phase
         self.cursor_phase[0] = phase
+
+    def apply_phase_offset(self, offset, offset_vector):
+        """
+        Add a phase offset to current singularity
+        :param offset:
+        :return:
+        """
+        self.phase[0] += offset
+        while (self.phase[0] > 360):
+            self.phase[0] -= 360
+        while (self.phase[0] < -360):
+            self.phase[0] += 360
 
     def set_freq(self, freq):
         """

@@ -61,6 +61,7 @@ class GML_App_3D():
         self.timer_max = 25
         self.run_on = True
         self.tempo = 1
+        self.runtime_callback=None
 
     def set_title(self,title="OpenGML"):
         pygame.display.set_caption(title)
@@ -109,6 +110,9 @@ class GML_App_3D():
 
     def add_key_callback(self,key,callback,redraw):
         self.callback_keys.append([key,callback,redraw])
+
+    def add_runtime_callback(self,runtime_callback):
+        self.runtime_callback = runtime_callback
 
     def run(self):
         """
@@ -313,6 +317,9 @@ class GML_App_3D():
                 for depth in range(1, 20):
                     self.rootNode.depth_projection(depth, [0, 255, 0], depth * 10, True)
                     self.rootNode.depth_projection(depth, [255, 0, 0], depth * 10, False)
+
+            if (self.runtime_callback is not None):
+                self.runtime_callback(self.rootNode)
 
             pygame.display.flip()
 

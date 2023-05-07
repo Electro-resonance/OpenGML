@@ -52,6 +52,28 @@ class GML_3D(GML_2D):  # , NodeMixin):  # Add Node feature
             self.freq[dimension] = (100) / freq[dimension] + 0.1
             self.orbit_radius[dimension] = abs(freq[dimension])
 
+    def apply_phase_offset(self, offset=None, offset_vector=None):
+        """
+        Add a phase offset or phase vector offset to current singularity
+        :param offset:
+        :param offset_vector:
+        :return:
+        """
+        if(offset_vector is not None):
+            dimension=0
+            for offset_dim in offset_vector:
+                self.phase[dimension] += offset_dim
+                while (self.phase[dimension] > 360):
+                    self.phase[dimension] -= 360
+                while (self.phase[dimension] < -360):
+                    self.phase[dimension] += 360
+                dimension+=1
+        elif (offset is not None):
+            self.phase[0] += offset
+            while (self.phase[0] > 360):
+                self.phase[0] -= 360
+            while (self.phase[0] < -360):
+                self.phase[0] += 360
 
     def calc_mypos(self):
         """
