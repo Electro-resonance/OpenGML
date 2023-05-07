@@ -41,13 +41,20 @@ class GML_Bond:
         self.thickness = thickness
 
     def update(self, dt=0):
+        phase1=self.singularity1.phase[0]
+        phase2=self.singularity2.phase[0]
+        while (phase1-phase2)<180 :
+            phase1+=360
         # Calculate the phase difference between the two singularities
-        phase_diff = self.singularity1.phase[0] - self.singularity2.phase[0] + self.phase_offset
-        phase_diff = np.unwrap([phase_diff])[0]  # unwrap to remove jumps
+        phase_diff = phase1 - phase2 + self.phase_offset
+
+        phase_diff -= 360
+        coupled_phase=self.coupling * phase_diff
+        #print("phase_diff=",phase_diff," coupled=",coupled_phase)
 
         # Calculate the force on each singularity due to the bond
-        force1 = self.coupling * phase_diff
-        force2 = -self.coupling * phase_diff
+        force1 = coupled_phase
+        force2 = -coupled_phase
 
         #print("force1=",force1," force2=",force2)
 
