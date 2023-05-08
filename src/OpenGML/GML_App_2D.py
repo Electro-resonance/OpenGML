@@ -282,7 +282,7 @@ class GML_App_2D(App):
 
         if (self.redraw == True):
             # Create the GML tree
-            self.rootNode = self.populate_function()
+            self.rootNode = self.populate_function(self.demo_select)
             self.rootNode.print_tree()
 
         return True
