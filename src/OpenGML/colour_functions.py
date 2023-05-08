@@ -34,6 +34,18 @@ FLGREEN = [190, 255, 0]
 GREEN2 = [30, 255, 105]
 INDIGO = [75, 0, 130]
 
+colour_palette1 = [RED, GREEN, BLUE, YELLOW, CYAN, PART_RED, PART_YELLOW, PART_CYAN, BLUE_PURPLE,
+                   ORANGE, VIOLET, SEABLUE, GREEN2, INDIGO]
+
+colour_num=0
+
+def next_colour():
+    global colour_num
+    colour_num += 1
+    if (colour_num >= len(colour_palette1)):
+        colour_num = 0
+    return colour_palette1[colour_num]
+
 def subtractColours (colour1,colour2,wrap):
     """
     Generate a colour as a difference of two supplied colours

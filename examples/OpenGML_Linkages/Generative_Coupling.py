@@ -52,6 +52,12 @@ def recursive_bonds(singularities, depth, prob=0.5, coupling=0.01):
 bonds = []
 linkage_enable=True
 
+def rand_direction():
+    direction = random.randint(0, 1)
+    if (direction == 0):
+        direction = -1
+    return direction
+
 def populate_demo(demo_num=0):
     """
     Function to create a simple OpenGML tree
@@ -60,28 +66,26 @@ def populate_demo(demo_num=0):
     diameter=8 #Size of the singularity drawn
     freq_mult=4 #Determines the size of the circle that the singularities rotate
 
-    colors = [RED, ORANGE, INDIGO, VIOLET, YELLOW]
-
     primes=generate_primes(20)
     #print(primes)
-    #print (gcd(10,25))
 
     #Create a tiny point as starting root node for the GML tree
     rootNode=create_bindu()
 
     singularities = []
+    colour_num=0
     # create singularities with frequencies based on prime numbers
     for i in range(len(primes)):
         frequency = primes[i]+80
         # Add a single point to the root node
-        singularity=rootNode.add_singularity(0, diameter, frequency*freq_mult+50, DARK_GREY)
+        singularity=rootNode.add_singularity(0, diameter, rand_direction() * frequency*freq_mult+50, DARK_GREY)
         singularities.append(singularity[0])
-        color = colors[random.randint(0,len(colors)-1)]
+        color=next_colour()
         phase_offset=random.randint(-180, 180)
-        corners = singularity[0].add_triangle(0, diameter, frequency * freq_mult/2, color)
+        corners = singularity[0].add_triangle(0, diameter, rand_direction() * frequency * freq_mult/2, color)
         for corner in corners:
             singularities.append(corner)
-            corners2=corner.add_square(0, diameter, frequency * freq_mult/4, color)
+            corners2=corner.add_square(0, diameter, rand_direction() * frequency * freq_mult/4, color)
             for corner2 in corners2:
                 singularities.append(corner2)
 
