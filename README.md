@@ -5,12 +5,8 @@
 A language for creating nested geometries based on a mathematical Geometric Musical Language (GML). GML is a language 
 originally developed to describe the complex resonances within Microtubules occurring in the form of 
 "Triplet of Triplet" resonance bands. GML provides the foundations for constructing simulations of 
-"Polyatomic Time Crystals" using 3D Bloch Spheres and for simulating "Self Operating Mathematical Universes" 
-(SOMU) and for development of interfaces between biology and AI.
-`
-OpenGML provides two interchangeable frameworks using Kivy for 2D OpenGML and Pygame with OpenGL for 3D OpenGML.
-Both frameworks support the addition of sonification using FluidSynth and GM SoundFonts (.sf2) to create stereo panned
-soundscapes using atonal frequencies based on the geometry of the OpenGML structures modelled.
+"Polyatomic Time Crystals" using 3D Bloch Spheres, for simulating "Self Operating Mathematical Universes" 
+(SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
 - [The development and history of OpenGML](doc/Development_History.md) [8th May, 2023]
@@ -50,7 +46,10 @@ soundscapes using atonal frequencies based on the geometry of the OpenGML struct
 17. Boltzmann, L (1871), Wien. Ber.63, 679, Vorlesungen über Gastheorie 
 18. Lissajous, J. A. (1857) Mémoire sur l'étude optique des mouvements vibratoires
 
-
+### Technical Detail
+OpenGML provides two interchangeable frameworks using Kivy for 2D OpenGML and Pygame with OpenGL for 3D OpenGML.
+Both frameworks support the addition of sonification using FluidSynth and GM SoundFonts (.sf2) to create stereo panned
+soundscapes using atonal frequencies based on the geometry of the OpenGML structures modelled.
 
 ### Pre-Requisites
 Python 3.9.10
