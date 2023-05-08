@@ -118,12 +118,11 @@ not perfect and the user may need to edit and select the code and do their own d
 It is worth experimenting combining elements of OpenGML with ChatGPT and similar LLMs.
 
 ### TSC2023 
-This work will be presented at The Science of Consciousness Conference in Taormina, Scily: 
-https://tsc2023-taormina.it/
+This work will be presented at [The Science of Consciousness Conference 2023](https://tsc2023-taormina.it/) in Taormina, Scily: 
 
 The abstract for the relating conference concurrent session to be presented is as follows:
 
-### Abstract
+### Abstract from [Book of Abstracts](https://tsc2023-taormina.it/assets/images/TSCTaormina2023.pdf)
 #### C-15 (Wed): Experimental Geometrical Musical Language (GML) Nested Clock
 Universes, the Definition of Bindu and the Philosophical Similarities to One That Arises From Simulation
 Martin Timms 1,2, Anirban Bandyopadhyay 2,1
@@ -175,18 +174,18 @@ GML, geometry, resonance, clock architecture, simulation, AI, One, Pantheism, Bi
 Universal Consciousness
 
 ## Further Reading
-1. Bandyopadhyay, A. (2020). NanoBrain – The Making of an Artificial Brain from a Time Crystal
-2. Bandyopadhyay, Anirban. (2021) SOMU theory of consciousness. www.nanobraintech.com https://nanobraintech.com/2021/05/06/somu-theory-of-consciousness/
-3. Bandyopadhyay, A.  et al. (2020). US Patent US20200160174 “Universal Geometric-Musical Language For big data processing in an assembly of clocking resonators “
-4. Wolfram, S. (2020). A Project To Find The Fundamental Theory of Physics
-5. Bandyopadhyay, A. et al. (2017). Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing
-6. Hameroff, S. Penrose, R. (2014 )Consciousness in the universe: a review of the 'Orch OR' theory. 
+1. Bandyopadhyay, Anirban. (2019). [Nanobrain: The Making of an Artificial Brain from a Time Crystal.](https://www.taylorfrancis.com/books/mono/10.1201/9780429107771/nanobrain-anirban-bandyopadhyay)
+2. Bandyopadhyay, Anirban. (2021) [SOMU theory of consciousness.](www.nanobraintech.com https://nanobraintech.com/2021/05/06/somu-theory-of-consciousness/)
+3. Bandyopadhyay, A. et al. (2020). [US Patent US20200160174 “Universal Geometric-Musical Language For big data processing in an assembly of clocking resonators “](https://uspto.report/patent/app/20200160174)
+4. Wolfram, S. (2020). [A Project To Find The Fundamental Theory of Physics](https://www.wolfram-media.com/products/a-project-to-find-the-fundamental-theory-of-physics/)
+5. Bandyopadhyay, A. et al.  (2018). [Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing.](https://link.springer.com/chapter/10.1007/978-981-10-5699-4_33)
+6. Hameroff, S. Penrose, R. (2014). [Consciousness in the universe: a review of the 'Orch OR' theory.](https://www.sciencedirect.com/science/article/pii/S1571064513001188)
 7. Wilczek, F. et al. Zakrzewski, J. (2012). Viewpoint: Crystals of Time. physics.aps.org. APS Physics
 7. Amelino-Cameliaa, G., Freidelc, L., Kowalski-Glikmanb, J., & Smolinc, L. (2011) The principle of relative locality
-8. Strogatz, S. (2004). Sync: The Emerging Science of Spontaneous Order
-9. Wolfram, S. (2002). A New Kind of Science
-10. Winfree, A. (1986). The Timing of Biological Clocks. 
-11. Winfree, A. (1980). The Geometry of Biological Time.
+8. Strogatz, S. (2004). [Sync: The Emerging Science of Spontaneous Order](https://www.stevenstrogatz.com/books/sync-the-emerging-science-of-spontaneous-order)
+9. Wolfram, S. (2002). [A New Kind of Science](https://www.wolframscience.com/nks/)
+10. Winfree, A. (1986). [The Timing of Biological Clocks.](https://openlibrary.org/books/OL2722076M/The_timing_of_biological_clocks) 
+12. Winfree, A. (1980). [The Geometry of Biological Time.](https://openlibrary.org/works/OL4448379W/The_geometry_of_biological_time?edition=key%3A/books/OL1857963M)
 12. M. Narducci, C. Alton Coulter, and Charles M. Bowden (1974). Exact diffusion equation for a model for superradiant emission 
 13. F. T. Arecchi, Eric Courtens, Robert Gilmore, and Harry Thomas (1972). Atomic Coherent States in Quantum Optics
 14. Feynmann, Venon and Hellwarth (1957). Geometrical Representation of the Schrodinger Equation for Solving Maser Problems
@@ -200,9 +199,10 @@ Universal Consciousness
 22. Tu-Shun (557-640 CE). Avatamsaka Sutra
 
 ## WebLinks and Software
-1. https://en.wikipedia.org/wiki/MIDI_tuning_standard
-2. https://member.keymusician.com/Member/FluidR3_GM/index.html
-3. https://www.fluidsynth.org/
-3. https://www.pygame.org
-4. https://kivy.org/
-5. https://chat.openai.com/
+1. [MIDI Tuning](https://en.wikipedia.org/wiki/MIDI_tuning_standard)
+2. [FluidR3_FM Soundfont](https://member.keymusician.com/Member/FluidR3_GM/index.html)
+3. [FluidSynth](https://www.fluidsynth.org/)
+3. [PyGame](https://www.pygame.org)
+4. [Kivy](https://kivy.org/)
+5. [ChatGPT](https://chat.openai.com/)
+6. [PyCharm IDE](https://www.jetbrains.com/pycharm/)
