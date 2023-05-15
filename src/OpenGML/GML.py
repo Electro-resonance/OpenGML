@@ -22,6 +22,8 @@ from pygame_functions import PygameGraphicsHelper
 import trig_tables as trig
 from colour_functions import *
 from euclidean_functions import euclidean_bjorklund,euclidean_form_string,euclidean_rhythm_string
+import random
+from prime_functions import is_prime
 import GML_Bond
 
 
@@ -58,6 +60,7 @@ class GMLBaseClass(object):
     graphics_helper = BlitGraphicsHelper()
     mode_3d=False
     bonds=[]
+    pos_scale = 1
 
     def set_reverse(self, rev):
         """
@@ -209,6 +212,7 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
         self.oscillator_speed_node=1
         self.edges=[]
         self.preserve_edges=False
+        self.pathway=[]
 
     def set_singularity_parameters(self,freq,phase):
         """
@@ -313,11 +317,11 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
         """
         self.children1.append(node)
 
-    def remove_child(self, node):
+    #def remove_child(self, node):
         """
         Remove a child from the current tree node.
         """
-        self.children1.remove(node)
+        #self.children1.remove(node)
 
     def get_cartesian_pos(self):
         """
@@ -378,7 +382,7 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
                           / 2, GMLBaseClass.screen_height/2,0]
         else:
             self.mypos = self.parent.mypos
-        self.mypos = [self.mypos[0]+self.pos[0], self.mypos[1]+self.pos[1], self.mypos[2]]
+        self.mypos = [self.mypos[0]+self.pos[0]/self.pos_scale, self.mypos[1]+self.pos[1]/self.pos_scale, self.mypos[2]]
 
     def nearest(self, test_pos, max_distance, limit):
         """
@@ -524,6 +528,7 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
         else:
             self.mypos2 = self.parent.mypos
 
+
         max_r = 0
         if(GMLBaseClass.draw_mode >= 7):
             for child_node in self.children1:
@@ -531,21 +536,29 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
                     if(child_node.orbit_radius[0] > max_r):
                         max_r = child_node.orbit_radius[0]  # *0.67
 
+        #self.pathway.extend([self.mypos[0],self.mypos[1],self.mypos[2]])
+        #while(len(self.pathway)>63):
+        #    self.pathway.pop(0)
+        #    self.pathway.pop(0)
+        #    self.pathway.pop(0)
+        #    print(self.pathway)
+        #self.graphics_helper.plot_lines_3D(self.pathway,self.colour, 1.0)
+
         self.graphics_helper.draw_singularity(self.image_ids[0],
                                               self.image_ids[1],
                                               self.mypos, self.mypos2,
-                                              self.orbit_radius[0], self.phase[0], self.angle_offset,
+                                              self.orbit_radius[0]/GMLBaseClass.pos_scale, self.phase[0], self.angle_offset,
                                               self.colour,GMLBaseClass.draw_mode,
                                               self.is_spiral,self.spiral_rotates,self.spiral_mode,self.spiral_rate,
                                               max_r)
 
-        newpos = [self.mypos2[0]+self.pos[0], self.mypos2[1]+self.pos[1],self.mypos2[2]+self.pos[2]]
+        newpos = [self.mypos2[0]+self.pos[0]/GMLBaseClass.pos_scale, self.mypos2[1]+self.pos[1]/GMLBaseClass.pos_scale,self.mypos2[2]+self.pos[2]/GMLBaseClass.pos_scale]
         #pygame.draw.line(screen,self.colour, self.mypos ,newpos,1)
         self.mypos2 = newpos
 
         #Draw the singularity
         if(GMLBaseClass.draw_mode >= 3):
-            self.graphics_helper.create_circle(self.image_ids[2], self.mypos2, self.diameter, 0, self.colour, [0, 0, 0], 200,
+            self.graphics_helper.create_circle(self.image_ids[2], self.mypos2, self.diameter/GMLBaseClass.pos_scale, 0, self.colour, [0, 0, 0], 200,
                                                    False, 0)
         #print("Mypos",self.mypos)
         #Draw the orbit circle
@@ -937,6 +950,99 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
                 angle += angle_incr
         return self
 
+    def symmetry_breaking(self, limit, min_freq=0.01, max_freq=200):
+        """
+        Symmetry breaking
+        """
+        number_children=len(self.children1)
+        if(number_children==0 or is_prime(number_children)==False):
+            root=self
+            # Check if symmetry breaking should be applied
+            if random.random() > 0.999:
+                if random.random() > 0.5:
+                    child_freq=root.freq[0] / 2
+                else:
+                    child_freq = root.freq[0] * 2
+                if(child_freq>max_freq):
+                    child_freq = max_freq
+                elif (child_freq<min_freq):
+                    child_freq = min_freq
+                child_phase=root.phase[0]
+                node=self.add_singularity(child_phase, root.diameter, child_freq, root.colour)
+
+                for bond in self.bonds:
+                    if bond.singularity1==root:
+                        node.add_bond(node,bond.singularity2)
+                    if bond.singularity2==root:
+                        node.add_bond(node, bond.singularity1)
+
+            elif random.random() > 0.999:
+                if (number_children > 0):
+                    self.remove_child(self.children1[0])
+        elif random.random() > 0.9999:
+            if (number_children > 0):
+                self.remove_child(self.children1[0])
+
+        limit -= 1
+        if (limit > 0):
+            for child_node in self.children1:
+                if (child_node != None):
+                    child_node.symmetry_breaking(limit)
+        return self
+
+    def symmetry_breaking2(self, limit, min_freq=0.01, max_freq=200):
+        """
+        Symmetry breaking
+        """
+        number_children = len(self.children1)
+        if (number_children == 0 or is_prime(number_children) == False):
+            root = self
+            # Check if symmetry breaking should be applied
+            if random.random() > 0.999:
+                # Apply symmetry breaking by adding a new child node
+                if random.random() > 0.5:
+                    child_freq = root.freq[0] / 2
+                else:
+                    child_freq = root.freq[0] * 2
+                if child_freq > max_freq:
+                    child_freq = max_freq
+                elif child_freq < min_freq:
+                    child_freq = min_freq
+                child_phase = root.phase[0]
+                node = self.add_singularity(child_phase, root.diameter, child_freq, root.colour)
+
+                for bond in self.bonds:
+                    if bond.singularity1 == root:
+                        node.add_bond(node, bond.singularity2)
+                    if bond.singularity2 == root:
+                        node.add_bond(node, bond.singularity1)
+
+            elif random.random() > 0.999:
+                # Apply symmetry breaking by removing a child node
+                if number_children > 0:
+                    self.remove_child(self.children1[0])
+
+        elif random.random() > 0.9999:
+            # Apply symmetry breaking by duplicating a child node
+            if number_children > 0:
+                child_node = self.children1[0]
+                new_node = self.add_singularity(child_node.phase[0], child_node.diameter, child_node.freq[0],
+                                                child_node.colour)
+                for bond in child_node.bonds:
+                    new_node.add_bond(new_node, bond.singularity1)
+                    new_node.add_bond(new_node, bond.singularity2)
+                # Apply symmetry breaking by rotating the duplicated child node
+                angle = random.random() * 360
+                new_node.phase = angle
+
+        limit -= 1
+        if (limit > 0):
+            for child_node in self.children1:
+                if (child_node != None):
+                    child_node.symmetry_breaking(limit)
+        return self
+
+
     def add_euclidean_rhythm(self, name, events, steps, rotation=0 , diameter=8, freq=30, colour=[255,0,255], freq_factor=1.0, random_colour=False):
         """
         Method to create a Euclidean Rhythm
@@ -997,10 +1103,28 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
         else:
             return best_node.parent
 
+    def remove_all_children(self):
+        """
+        Remove all children from this node and count how many removed
+        :return:
+        """
+        for child in self.children1:
+            child.remove_all_children()
+            self.children1.remove(child)
+            GMLBaseClass.osc_count -= 1
+
+
     def remove_child(self,remove_node):
+        """
+        :param remove_node:
+        :param decrement:
+        :return:
+        """
         for child in self.children1:
             if(child==remove_node):
+                remove_node.remove_all_children()
                 self.children1.remove(remove_node)
+                GMLBaseClass.osc_count -= 1
                 return True
             if (len(child.children1) > 0):
                 removed=child.remove_child(remove_node)
@@ -1018,8 +1142,7 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
                 smallest_node=self.smallest_child(-1)
                 #self.children1.pop(0)
                 #self.children1.remove(smallest_node)
-                if(self.remove_child(smallest_node)):
-                    GMLBaseClass.osc_count -= 1
+                self.remove_child(smallest_node)
 
     def balance_phases(self):
         """

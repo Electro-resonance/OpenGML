@@ -31,3 +31,17 @@ def gcd(a, b):
     while b != 0:
         a, b = b, a % b
     return a
+
+def is_prime(number):
+    """
+    Checks if a number is prime.
+    :param number: The number to be checked.
+    :return: True if the number is prime, False otherwise.
+    """
+    if number <= 1:
+        return False
+
+    for i in range(2, int(number**0.5) + 1):
+        if number % i == 0:
+            return False
+    return True

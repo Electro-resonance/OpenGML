@@ -14,7 +14,7 @@ def populate_demo(demo_num):
     # Size of the singularities drawn
     diameter = 20
     # Frequency determines the size of the circle that the singularities rotate
-    frequency = [100, 100]
+    frequency = [100, 400]
 
     # Create the Bindu - a tiny point as starting root node for the GML tree
     rootNode = create_bindu_3D()

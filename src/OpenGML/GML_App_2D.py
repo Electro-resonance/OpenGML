@@ -78,12 +78,14 @@ class GML_App_2D(App):
         self.run_on = True
         self.tempo = 1
         self.redraw=False
+        self.timed_redraw = False
         self.demo_num_callback=None
         GML_graphics_helper().key_pressed('h') #Trigger help menu
         self.key_callback=None
         self.last_key_press=Clock.get_time()
         self.dt_key_press=0
         self.runtime_callback=None
+        self.last_redraw = Clock.get_time()
 
     def on_window_resize(self, window, width, height):
         """
@@ -275,6 +277,16 @@ class GML_App_2D(App):
             self.tempo += 1
         elif keycode[1] == '8':
             self.tempo -= 1
+        elif keycode[1] == 'k':
+            GMLBaseClass.pos_scale += 0.1
+            self.redraw = True
+        elif keycode[1] == 'm':
+            GMLBaseClass.pos_scale -= 0.1
+            self.redraw = True
+        elif keycode[1] == 'o':
+            GMLBaseClass.pos_scale += 0.1
+        elif keycode[1] == 'p':
+            GMLBaseClass.pos_scale -= 0.1
 
         GML_graphics_helper().key_pressed(keycode[1])
         if(self.key_callback is not None):

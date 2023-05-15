@@ -2,11 +2,11 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
 # Created By  : Martin Timms
-# Created Date: 3rd June 2022
+# Created Date: 15th May 2023
 # License: BSD-3-Clause License
 # Organisation: OpenGML.org/
 # Project: https://github.com/Electro-resonance/OpenGML
-# Description: Phase Locking Oscillators
+# Description: Symmetry Breaking Oscillators
 # Example of oscillators that phase lock
 # =============================================================================
 import sys
@@ -66,7 +66,7 @@ def populate_demo(demo_num=0):
     diameter=8 #Size of the singularity drawn
     freq_mult=4 #Determines the size of the circle that the singularities rotate
 
-    primes=generate_primes(20)
+    primes=generate_primes(10)
     #print(primes)
 
     #Create a tiny point as starting root node for the GML tree
@@ -130,11 +130,12 @@ def runtime_callback(rootNode):
         # Apply bond linkage as a force between singularities
         for bond in bonds:
             bond.update()
+    rootNode.symmetry_breaking2(10)
 
 
 if __name__ == '__main__':
     # Run the app
-    app = app2d.GML_App_2D("Phase Locking Oscillators", populate_demo, sonic_enabled=True)
+    app = app2d.GML_App_2D("Symmetry Breaking Oscillators", populate_demo, sonic_enabled=True)
     app.initial_rotation_speed(0.3)
     app.balancing_phases(False)
     app.mode_2d=2
