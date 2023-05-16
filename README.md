@@ -15,6 +15,9 @@ originally developed to describe the complex resonances within Microtubules occu
 - [Examples of 3D OpenGML](examples/OpenGML_3D) [7th May, 2023]
 - [Examples demonstrating Phase Coupling](examples/OpenGML_Linkages) [7th May, 2023]
 - [Triplet of Triplet Resonance Model](examples/OpenGML_3D/3D_Triplet_of_Triplet.py) [7th May, 2023]
+- [Basic Symmetry_Breaking for a 2D SOMU](examples/OpenGML_Linkages/Symmetry_Breaking.py) [15th May, 2023]
+- [Balanced Symmetry_Breaking for a 2D SOMU](examples/OpenGML_Linkages/Balanced_Symmetry.py) [16th May, 2023]
+
 
 ## Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
@@ -24,9 +27,10 @@ originally developed to describe the complex resonances within Microtubules occu
 #### Academic references for GML:
 
 1. Bandyopadhyay, Anirban. (2019). [Nanobrain: The Making of an Artificial Brain from a Time Crystal.](https://www.taylorfrancis.com/books/mono/10.1201/9780429107771/nanobrain-anirban-bandyopadhyay)
-2. Bandyopadhyay, A. et al. (2020). [US Patent US20200160174 “Universal Geometric-Musical Language For big data processing in an assembly of clocking resonators “](https://uspto.report/patent/app/20200160174) 
-3. Bandyopadhyay, A. et al.  (2018). [Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing.](https://link.springer.com/chapter/10.1007/978-981-10-5699-4_33)
-4. Bandyopadhyay, Anirban. (2021) [SOMU theory of consciousness.](https://nanobraintech.com/2021/05/06/somu-theory-of-consciousness/)
+2. Bandyopadhyay, A. et al. (2022). [Polyatomic time crystals of the brain neuron extracted microtubule are projected like a hologram meters away.](https://pubs.aip.org/aip/jap/article/132/19/194401/2837827/Polyatomic-time-crystals-of-the-brain-neuron?s=09) 
+3. Bandyopadhyay, A. et al. (2020). [US Patent US20200160174 “Universal Geometric-Musical Language For big data processing in an assembly of clocking resonators “](https://uspto.report/patent/app/20200160174) 
+4. Bandyopadhyay, A. et al.  (2018). [Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing.](https://link.springer.com/chapter/10.1007/978-981-10-5699-4_33)
+5. Bandyopadhyay, Anirban. (2021) [SOMU theory of consciousness.](https://nanobraintech.com/2021/05/06/somu-theory-of-consciousness/)
 
 #### Academic references relating to time crystals and clock based models:
 
@@ -94,4 +98,5 @@ examples/OpenGML_Linkages
 Please be aware that OpenGML applications can cause stroboscopic visual displays. 
 If you have any medical conditions especially relating to stroboscopic and/or flashing visual triggers, 
 please consult with your doctor before using OpenGML.
+
 

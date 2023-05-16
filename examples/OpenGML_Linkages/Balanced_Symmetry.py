@@ -2,12 +2,13 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
 # Created By  : Martin Timms
-# Created Date: 15th May 2023
+# Created Date: 16th May 2023
 # License: BSD-3-Clause License
 # Organisation: OpenGML.org/
 # Project: https://github.com/Electro-resonance/OpenGML
-# Description: Symmetry Breaking Oscillators
-# Example of oscillators that phase lock, share bonds, and symmetry break
+# Description: Balanced Symmetry Breaking Oscillators
+# Example of oscillators that phase lock, share bonds, symmetry break and
+# also try to balance.
 # =============================================================================
 import sys
 sys.path.append("../../src/OpenGML")  # AddOpenGML path
@@ -136,9 +137,9 @@ def runtime_callback(rootNode):
 
 if __name__ == '__main__':
     # Run the app
-    app = app2d.GML_App_2D("Symmetry Breaking Oscillators", populate_demo, sonic_enabled=True)
+    app = app2d.GML_App_2D("Balanced Symmetry Breaking Oscillators", populate_demo, sonic_enabled=True)
     app.initial_rotation_speed(0.3)
-    app.balancing_phases(False)
+    app.balancing_phases(True)
     app.mode_2d=2
     app.set_depth_projection(False)
     # Add the callbacks

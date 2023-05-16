@@ -45,3 +45,52 @@ def is_prime(number):
         if number % i == 0:
             return False
     return True
+
+def generate_pattern_of_primes(n):
+    """
+    Generate the pattern of primes (difference between each prime)
+    :param n: Maximum prime to consider
+    :return: list containing the pattern
+    """
+    primes = generate_primes(n)
+    pattern = []
+    for i in range(len(primes) - 1):
+        pattern.append(primes[i + 1] - primes[i])
+    return pattern
+
+def factorize(num_list, dimensions=4):
+    """
+    Given a list of integers, create a list of prime factors
+    :param num_list: Input list
+    :param dimensions:
+    :return: output list of factors
+    """
+    factors = []
+    for num in num_list:
+        candidate = num
+        prime_factors = []
+        for i in range(dimensions - 1, 0, -1):
+            if i == 1:
+                prime_factors.append(num)
+            else:
+                while num % i == 0:
+                    prime_factors.append(i)
+                    num = num // i
+        factors.append([candidate, prime_factors])
+    return factors
+
+def prime_factorization(num):
+    """
+    For a given number return a list of the prime factors
+    :param num_list: Input number
+    :return: output list of factors
+    """
+    factors = []
+    divisor = 2
+    while divisor <= num:
+        if num % divisor == 0:
+            factors.append(divisor)
+            num = num / divisor
+        else:
+            divisor += 1
+    return factors

@@ -22,7 +22,6 @@ from pygame_functions import PygameGraphicsHelper
 import trig_tables as trig
 from colour_functions import *
 from euclidean_functions import euclidean_bjorklund,euclidean_form_string,euclidean_rhythm_string
-import random
 from prime_functions import is_prime
 import GML_Bond
 
@@ -949,99 +948,6 @@ class GML_2D(GMLBaseClass):  # , NodeMixin):  # Add Node feature
                                           freq*freq_factor, colour, freq_factor, random_colour)
                 angle += angle_incr
         return self
-
-    def symmetry_breaking(self, limit, min_freq=0.01, max_freq=200):
-        """
-        Symmetry breaking
-        """
-        number_children=len(self.children1)
-        if(number_children==0 or is_prime(number_children)==False):
-            root=self
-            # Check if symmetry breaking should be applied
-            if random.random() > 0.999:
-                if random.random() > 0.5:
-                    child_freq=root.freq[0] / 2
-                else:
-                    child_freq = root.freq[0] * 2
-                if(child_freq>max_freq):
-                    child_freq = max_freq
-                elif (child_freq<min_freq):
-                    child_freq = min_freq
-                child_phase=root.phase[0]
-                node=self.add_singularity(child_phase, root.diameter, child_freq, root.colour)
-
-                for bond in self.bonds:
-                    if bond.singularity1==root:
-                        node.add_bond(node,bond.singularity2)
-                    if bond.singularity2==root:
-                        node.add_bond(node, bond.singularity1)
-
-            elif random.random() > 0.999:
-                if (number_children > 0):
-                    self.remove_child(self.children1[0])
-        elif random.random() > 0.9999:
-            if (number_children > 0):
-                self.remove_child(self.children1[0])
-
-        limit -= 1
-        if (limit > 0):
-            for child_node in self.children1:
-                if (child_node != None):
-                    child_node.symmetry_breaking(limit)
-        return self
-
-    def symmetry_breaking2(self, limit, min_freq=0.01, max_freq=200):
-        """
-        Symmetry breaking
-        """
-        number_children = len(self.children1)
-        if (number_children == 0 or is_prime(number_children) == False):
-            root = self
-            # Check if symmetry breaking should be applied
-            if random.random() > 0.999:
-                # Apply symmetry breaking by adding a new child node
-                if random.random() > 0.5:
-                    child_freq = root.freq[0] / 2
-                else:
-                    child_freq = root.freq[0] * 2
-                if child_freq > max_freq:
-                    child_freq = max_freq
-                elif child_freq < min_freq:
-                    child_freq = min_freq
-                child_phase = root.phase[0]
-                node = self.add_singularity(child_phase, root.diameter, child_freq, root.colour)
-
-                for bond in self.bonds:
-                    if bond.singularity1 == root:
-                        node.add_bond(node, bond.singularity2)
-                    if bond.singularity2 == root:
-                        node.add_bond(node, bond.singularity1)
-
-            elif random.random() > 0.999:
-                # Apply symmetry breaking by removing a child node
-                if number_children > 0:
-                    self.remove_child(self.children1[0])
-
-        elif random.random() > 0.9999:
-            # Apply symmetry breaking by duplicating a child node
-            if number_children > 0:
-                child_node = self.children1[0]
-                new_node = self.add_singularity(child_node.phase[0], child_node.diameter, child_node.freq[0],
-                                                child_node.colour)
-                for bond in child_node.bonds:
-                    new_node.add_bond(new_node, bond.singularity1)
-                    new_node.add_bond(new_node, bond.singularity2)
-                # Apply symmetry breaking by rotating the duplicated child node
-                angle = random.random() * 360
-                new_node.phase = angle
-
-        limit -= 1
-        if (limit > 0):
-            for child_node in self.children1:
-                if (child_node != None):
-                    child_node.symmetry_breaking(limit)
-        return self
-
 
     def add_euclidean_rhythm(self, name, events, steps, rotation=0 , diameter=8, freq=30, colour=[255,0,255], freq_factor=1.0, random_colour=False):
         """
