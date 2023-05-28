@@ -24,7 +24,7 @@ originally developed to describe the complex resonances within Microtubules occu
 - [Martin Timms](https://linkedin.com/in/martin-timms-6a135282)
 - [Anirban Bandyopadhyay](https://www.linkedin.com/in/anirbanbandyopadhyay)
 
-#/# Highlights ✨
+## Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
 - [Videos of OpenGML](https://www.youtube.com/playlist?list=PLDK0CIWefiIIk_LC1tAPf3LZdCUjGhIK3)
 - - [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk)
