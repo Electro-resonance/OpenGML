@@ -27,7 +27,7 @@ originally developed to describe the complex resonances within Microtubules occu
 ## Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
 - [Videos of OpenGML](https://www.youtube.com/playlist?list=PLDK0CIWefiIIk_LC1tAPf3LZdCUjGhIK3)
-- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk)
+- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)
 
 
 #### Academic references for GML:
