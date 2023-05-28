@@ -21,10 +21,8 @@ originally developed to describe the complex resonances within Microtubules occu
 
 
 ## Project Contacts ✨
-- [Martin Timms](http://linkedin.com/in/martin-timms-6a135282)
-- [Anirban Bandyopadhyay](http://linkedin.com/in/martin-timms-6a135282)
-- http:/nanobraintech.com
-
+- [Martin Timms](https://linkedin.com/in/martin-timms-6a135282)
+- [Anirban Bandyopadhyay](https://www.linkedin.com/in/anirbanbandyopadhyay)
 
 #/# Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
