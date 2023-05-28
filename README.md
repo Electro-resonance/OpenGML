@@ -9,6 +9,7 @@ originally developed to describe the complex resonances within Microtubules occu
 (SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
+- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk)[28th May,2023]
 - [The development and history of OpenGML](docs/Development_History.md) [8th May, 2023]
 - [The differences between 2D and 3D OpenGML](docs/Differences_2D_and_3D_OpenGML.md) [8th May, 2023]
 - [Examples of 2D OpenGML](examples/OpenGML_2D) [7th May, 2023]
@@ -19,9 +20,16 @@ originally developed to describe the complex resonances within Microtubules occu
 - [Balanced Symmetry_Breaking for a 2D SOMU](examples/OpenGML_Linkages/Balanced_Symmetry.py) [16th May, 2023]
 
 
+## Project Contacts ✨
+- [Martin Timms](linkedin.com/in/martin-timms-6a135282)
+- [Anirban Bandyopadhyay](linkedin.com/in/martin-timms-6a135282)
+- nanobraintech.com
+
+
 ## Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
 - [Videos of OpenGML](https://www.youtube.com/playlist?list=PLDK0CIWefiIIk_LC1tAPf3LZdCUjGhIK3)
+- - [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk)
 
 
 #### Academic references for GML:
