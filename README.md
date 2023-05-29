@@ -101,8 +101,8 @@ examples/OpenGML_Linkages
 
 
 ## Disclaimer
-Please be aware that OpenGML applications can cause stroboscopic visual displays. 
+Please be aware that OpenGML applications can be used to generate stroboscopic visual displays. 
 If you have any medical conditions especially relating to stroboscopic and/or flashing visual triggers, 
-please consult with your doctor before using OpenGML.
+please consult with your doctor before using OpenGML for such purposes.
 
 
