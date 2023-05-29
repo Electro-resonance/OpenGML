@@ -9,7 +9,7 @@ originally developed to describe the complex resonances within Microtubules occu
 (SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
-- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk)[28th May,2023]
+- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)[28th May,2023]
 - [The development and history of OpenGML](docs/Development_History.md) [8th May, 2023]
 - [The differences between 2D and 3D OpenGML](docs/Differences_2D_and_3D_OpenGML.md) [8th May, 2023]
 - [Examples of 2D OpenGML](examples/OpenGML_2D) [7th May, 2023]
