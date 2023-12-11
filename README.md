@@ -9,6 +9,7 @@ originally developed to describe the complex resonances within Microtubules occu
 (SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
+- [Phase Prime Metric (PPM) 3D projection and visualisation](examples/OpenGML_PPM)[11th December 2023] 
 - [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)[28th May,2023]
 - [The development and history of OpenGML](docs/Development_History.md) [8th May, 2023]
 - [The differences between 2D and 3D OpenGML](docs/Differences_2D_and_3D_OpenGML.md) [8th May, 2023]
@@ -25,6 +26,7 @@ originally developed to describe the complex resonances within Microtubules occu
 - [Anirban Bandyopadhyay](https://www.linkedin.com/in/anirbanbandyopadhyay)
 
 ## Highlights ✨
+- [Screenshot of Phase Prime Metric](screenshots/PPM.jpg)
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
 - [Videos of OpenGML](https://www.youtube.com/playlist?list=PLDK0CIWefiIIk_LC1tAPf3LZdCUjGhIK3)
 - [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)
