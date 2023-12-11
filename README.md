@@ -9,6 +9,7 @@ originally developed to describe the complex resonances within Microtubules occu
 (SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
+- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)[28th May,2023]
 - [The development and history of OpenGML](docs/Development_History.md) [8th May, 2023]
 - [The differences between 2D and 3D OpenGML](docs/Differences_2D_and_3D_OpenGML.md) [8th May, 2023]
 - [Examples of 2D OpenGML](examples/OpenGML_2D) [7th May, 2023]
@@ -19,9 +20,14 @@ originally developed to describe the complex resonances within Microtubules occu
 - [Balanced Symmetry_Breaking for a 2D SOMU](examples/OpenGML_Linkages/Balanced_Symmetry.py) [16th May, 2023]
 
 
+## Project Contacts ✨
+- [Martin Timms](https://linkedin.com/in/martin-timms-6a135282)
+- [Anirban Bandyopadhyay](https://www.linkedin.com/in/anirbanbandyopadhyay)
+
 ## Highlights ✨
 - [Screenshot of Triplet of triplet resonance](screenshots/Triplet_of_Triplet_OpenGML.jpg)
 - [Videos of OpenGML](https://www.youtube.com/playlist?list=PLDK0CIWefiIIk_LC1tAPf3LZdCUjGhIK3)
+- [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)
 
 
 #### Academic references for GML:
@@ -95,8 +101,8 @@ examples/OpenGML_Linkages
 
 
 ## Disclaimer
-Please be aware that OpenGML applications can cause stroboscopic visual displays. 
+Please be aware that OpenGML applications can be used to generate stroboscopic visual displays. 
 If you have any medical conditions especially relating to stroboscopic and/or flashing visual triggers, 
-please consult with your doctor before using OpenGML.
+please consult with your doctor before using OpenGML for such purposes.
 
 
