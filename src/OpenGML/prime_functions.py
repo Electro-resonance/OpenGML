@@ -2,12 +2,13 @@
 # =============================================================================
 # Created By  : Martin Timms
 # Created Date: 7th May 2023
+# PPM Added: 11th December 2023
 # License: BSD-3-Clause License
 # Organisation: OpenGML.org/
 # Project: https://github.com/Electro-resonance/OpenGML
-# Description: Helper functions related to prime numbers
+# Description: Helper functions related to prime numbers and PPM
 # =============================================================================
-
+import math
 
 def generate_primes(n):
     """
@@ -45,6 +46,32 @@ def is_prime(number):
         if number % i == 0:
             return False
     return True
+
+# Set initial values for the cache
+# to speed up retrieval of already integers already tested as primes
+prime_cache = {}
+
+def is_prime_cached(num):
+    """
+    Checks if a number is prime.
+    Caches all test results
+    :param number: The number to be checked.
+    :return: True if the number is prime, False otherwise.
+    """
+    global prime_cache
+    if num in prime_cache:
+        return prime_cache[num]
+    if num < 2:
+        prime_cache[num] = False
+    else:
+        for i in range(2, int(num**0.5) + 1):
+            if num % i == 0:
+                prime_cache[num] = False
+                break
+        else:
+            prime_cache[num] = True
+    return prime_cache[num]
+
 
 def generate_pattern_of_primes(n):
     """
@@ -94,3 +121,76 @@ def prime_factorization(num):
         else:
             divisor += 1
     return factors
+
+def nth_prime(n):
+    """
+    Calculate the nth prime number.
+    """
+    primes = [2]
+    candidate = 3
+
+    while len(primes) < n:
+        is_prime = True
+        sqrt_candidate = math.isqrt(candidate)
+
+        for prime in primes:
+            if prime > sqrt_candidate:
+                break
+            if candidate % prime == 0:
+                is_prime = False
+                break
+
+        if is_prime:
+            primes.append(candidate)
+
+        candidate += 2
+
+    return primes[-1]
+
+def common_factors_recursive(n, current_factors=[], result=[]):
+    """
+    Recursive function to find all combinations of common factors for a given number.
+    :param n: The number to find common factors for.
+    :param current_factors: Current chain of factors.
+    :param result: List to store valid combinations.
+    """
+    max_n = n // 2 + 1
+    for i in range(2, max_n):
+        if n % i == 0:
+            new_factors = current_factors + [i]
+            common_factors_recursive(n // i, new_factors, result)
+
+    # If there are no more divisors, add the current chain of factors to the result
+    #if not (n // 2 > 1):
+    result1 = tuple(current_factors + [n])
+    if len(result1) > 1:
+        result.append(result1) # Add the factors found to the results
+        result.append(result1[::-1]) # Also add the reverse order form
+
+def ordered_factors(n,provide_factor_combinations=True):
+    """
+    Find all combinations of ordered factors for a given number.
+
+    :param n: The number to find common factors for.
+    :return: List of valid combinations.
+    """
+    result = []
+    common_factors_recursive(n, result=result)
+    result = list(set(result))
+    if(provide_factor_combinations==True):
+        # Full response with the complete list
+        return len(result), result
+    else:
+        # Faster response provides just the number of ordered factors
+        return len(result)
+
+def restrict(value, minimum, maximum):
+    """
+    Restrict a value within a specified range.
+
+    :param value: The value to be restricted.
+    :param minimum: The minimum allowable value.
+    :param maximum: The maximum allowable value.
+    :return: The restricted value within the specified range.
+    """
+    return min(max(value, minimum), maximum)
