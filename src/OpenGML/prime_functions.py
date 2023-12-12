@@ -167,6 +167,10 @@ def common_factors_recursive(n, current_factors=[], result=[]):
         result.append(result1) # Add the factors found to the results
         result.append(result1[::-1]) # Also add the reverse order form
 
+# Set initial values for the cache
+# to speed up retrieval of already integers already tested as primes
+ordered_factor_cache = {}
+
 def ordered_factors(n,provide_factor_combinations=True):
     """
     Find all combinations of ordered factors for a given number.
@@ -174,6 +178,10 @@ def ordered_factors(n,provide_factor_combinations=True):
     :param n: The number to find common factors for.
     :return: List of valid combinations.
     """
+    global ordered_factor_cache
+    if(provide_factor_combinations==False):
+        if n in ordered_factor_cache:
+            return ordered_factor_cache[n]
     result = []
     common_factors_recursive(n, result=result)
     result = list(set(result))
@@ -182,7 +190,10 @@ def ordered_factors(n,provide_factor_combinations=True):
         return len(result), result
     else:
         # Faster response provides just the number of ordered factors
-        return len(result)
+        ordered_factor_count=len(result)
+        #Cache the result
+        ordered_factor_cache[n]=ordered_factor_count
+        return ordered_factor_count
 
 def restrict(value, minimum, maximum):
     """

@@ -32,3 +32,8 @@ from prime_functions import ordered_factors
 for n in range (1,108+1):
     ordered_factors_count,ordered_factors_combinations = ordered_factors(n)
     print(f"OF({n}) = {ordered_factors_count}, Factors: {ordered_factors_combinations}")
+
+    # Check if each combination multiplies out to the original number n
+    for factors_combination in ordered_factors_combinations:
+        if math.prod(factors_combination) != n:
+            print(f"Invalid combination: {factors_combination}")

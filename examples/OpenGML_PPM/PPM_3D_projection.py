@@ -20,7 +20,8 @@
 #   - 'W' key: Increment PPM size.
 #   - 'S' key: Decrement PPM size.
 #   - 'P' key: Pause/unpause rotation.
-#   - 'F' key: Toggle fullscreen mode.
+#   - 'F' key: Toggle full-screen mode.
+#   - 'U' key: Toggle auto-centering mode.
 
 # To use this script, ensure you have the required libraries installed:
 #   - Pygame: pip install pygame
@@ -157,7 +158,7 @@ pygame.init()
 
 fullscreen = False
 # Set up display
-width, height = 2024, 1024
+width, height = 1747, 1080
 screen = pygame.display.set_mode((width, height))
 pygame.display.set_caption("Ordered Factors 3D Plot")
 
@@ -183,11 +184,24 @@ inc_order= False
 dec_order= False
 inc_points= False
 dec_points= False
+autoscale_autocenter = True
 
 pause=True
 order=1
 frac_order=1
-num_points=500
+
+# Calculate the center of the plot
+center_x = 1000
+center_y = 500
+
+# Calculate the width and height of the plot
+plot_width = 2024
+plot_height = 1024
+
+new_scale=1
+
+num_points=1000
+acceleration=5
 
 # Populate primes for use in the polar plot
 allocate_angles(37)
@@ -223,6 +237,8 @@ while running:
                     screen = pygame.display.set_mode((0, 0), FULLSCREEN)
                 else:
                     screen = pygame.display.set_mode((width, height))
+            elif event.key == K_u:
+                autoscale_autocenter = not autoscale_autocenter
         elif event.type == KEYUP:
             if event.key == K_UP:
                 key_up = False
@@ -284,6 +300,9 @@ while running:
     last_x=0
     last_y=0
 
+    minx = miny = float('inf')
+    maxx = maxy = float('-inf')
+
     for point in plot_points:
         point_index=point_index+1
         rotated_x = point[0] * math.cos(angle_y) - point[2] * 2 * math.sin(angle_y)
@@ -291,13 +310,18 @@ while running:
         rotated_y = point[1] * math.cos(angle_x) - rotated_z * math.sin(angle_x)
 
         #scale = 1
-        #rotated_x = rotated_x / scale
-        #rotated_y = rotated_y / scale
+        rotated_x = rotated_x * new_scale
+        rotated_y = rotated_y * new_scale
         #rotated_z = rotated_z / scale
 
-        scaled_x = int((rotated_x + width-800) / 2)
-        scaled_y = int((rotated_y + height) / 2)
+        scaled_x = int((rotated_x + width-center_x) / 2)
+        scaled_y = int((rotated_y + height-center_y+500) / 2)
         scaled_z = int((rotated_z + height) / 2)
+
+        minx = min(minx, rotated_x)
+        maxx = max(maxx, rotated_x)
+        miny = min(miny, rotated_y)
+        maxy = max(maxy, rotated_y)
 
 
         # Calculate shading based on the normal vector (assuming light is coming from the positive z direction)
@@ -338,6 +362,17 @@ while running:
         # Store latest point
         last_x=scaled_x
         last_y=scaled_y
+
+    # Calculate the center of the plot
+    center_x = ((center_x  * acceleration) + ((minx + maxx) / 2))/(acceleration+1)
+    center_y = ((center_y  * acceleration) + ((miny + maxy) / 2))/(acceleration+1)
+
+    # Calculate the width and height of the plot
+    plot_width = maxx - minx
+    plot_height = maxy - miny
+
+    # Calculate the new scale based on the smaller dimension
+    new_scale = (new_scale * acceleration + min(width / plot_width, height / plot_height))/(acceleration+1)
 
     # Display the text info
     display_text(order,num_points,angle_x,angle_y)
