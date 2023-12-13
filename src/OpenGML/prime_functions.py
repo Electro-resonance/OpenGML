@@ -9,6 +9,7 @@
 # Description: Helper functions related to prime numbers and PPM
 # =============================================================================
 import math
+from collections import defaultdict
 
 def generate_primes(n):
     """
@@ -169,7 +170,7 @@ def common_factors_recursive(n, current_factors=[], result=[]):
 
 # Set initial values for the cache
 # to speed up retrieval of already integers already tested as primes
-ordered_factor_cache = {}
+ordered_factor_cache = defaultdict(list)
 
 def ordered_factors(n,provide_factor_combinations=True):
     """
@@ -179,9 +180,8 @@ def ordered_factors(n,provide_factor_combinations=True):
     :return: List of valid combinations.
     """
     global ordered_factor_cache
-    if(provide_factor_combinations==False):
-        if n in ordered_factor_cache:
-            return ordered_factor_cache[n]
+    if not provide_factor_combinations and n in ordered_factor_cache:
+        return ordered_factor_cache[n]
     result = []
     common_factors_recursive(n, result=result)
     result = list(set(result))
@@ -190,9 +190,9 @@ def ordered_factors(n,provide_factor_combinations=True):
         return len(result), result
     else:
         # Faster response provides just the number of ordered factors
-        ordered_factor_count=len(result)
-        #Cache the result
-        ordered_factor_cache[n]=ordered_factor_count
+        ordered_factor_count = len(result)
+        # Cache the result
+        ordered_factor_cache[n] = ordered_factor_count
         return ordered_factor_count
 
 def restrict(value, minimum, maximum):

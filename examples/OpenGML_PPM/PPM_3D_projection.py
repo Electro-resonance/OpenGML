@@ -39,10 +39,14 @@ sys.path.append("../../src/OpenGML/prime_functions")  # AddOpenGML path
 from prime_functions import is_prime_cached
 from prime_functions import ordered_factors
 from prime_functions import restrict
+from trig_tables import fast_sin
+from trig_tables import fast_cos
+from trig_tables import create_tables
 
 import pygame
 from pygame.locals import *
 import math
+import numpy as np
 
 
 # Dictionary to store prime angles for the polar plot
@@ -70,7 +74,7 @@ def allocate_angles(max_prime):
     return prime_angle_table
 
 
-def generate_ordered_factors_plot(order=0, num_points=500):
+def generate_ordered_factors_plot(order=0, num_points=500, z_scaling=1):
     """
     Generate data points for the ordered factors plot.
 
@@ -78,6 +82,7 @@ def generate_ordered_factors_plot(order=0, num_points=500):
     :param num_points: The number of points to generate.
     :return: List of tuples representing (x, y, z, theta, radius) for each point.
     """
+    global prime_angle_table
     x_values = []
     y_values = []
     z_values = []
@@ -91,21 +96,25 @@ def generate_ordered_factors_plot(order=0, num_points=500):
 
         # Calculate the ordered factors count
         ordered_factors_count = ordered_factors(n, provide_factor_combinations=False)
+        #ordered_factors_count = ordered_factor_cache[n]
 
         # Iterate through prime factors
         for factor in prime_angle_table:
+            #Skip ordered factors with size zero
+            if(factor==0):
+                continue
+            theta_base = prime_angle_table[factor]
             # Check if the point is associated with the current prime factor
             if n % factor == 0:
                 # Rotate the point around the prime factor
                 for rotate in range(0, 24):
-                    theta_base = prime_angle_table[factor]
                     theta = (theta_base + rotate * 15)  # * 2 * math.pi
-                    radius = ordered_factors_count
+                    radius = ordered_factors_count / 2 # PPM uses ordered factors for diameter
                     x = radius * math.sin(theta)
                     y = radius * math.cos(theta)
                     x_values.append(x)
                     y_values.append(y)
-                    z_values.append(n)
+                    z_values.append(z_scaling * n)
                     theta_values.append(theta_base)
                     radius_values.append(radius)
 
@@ -126,7 +135,7 @@ def calculate_shading(normal, light_direction):
     return dot_product
 
 
-def display_text(order, num_points, angle_x, angle_y):
+def display_text(order, num_integers, num_points, angle_x, angle_y):
     """
     Display text information on the screen.
 
@@ -136,25 +145,31 @@ def display_text(order, num_points, angle_x, angle_y):
     :param angle_y: The Y-axis rotation angle to be displayed.
     """
     # Round the rotation angles for better readability
-    angle_x=round(angle_x/math.pi*180,1)
+    angle_x= round(angle_x / math.pi*180,1)
     angle_y = round(angle_y / math.pi * 180, 1)
 
     # Render text surfaces
     order_text = font.render(f"Order: {order}", True, (255, 255, 255))
-    points_text = font.render(f"Number of Points: {num_points}", True, (255, 255, 255))
+    integers_text = font.render(f"Z-Axis Integers: {num_integers}", True, (255, 255, 255))
+    points_text = font.render(f"Total Points: {num_points}", True, (255, 255, 255))
     x_text = font.render(f"X: {angle_x}", True, (255, 255, 255))
     y_text = font.render(f"Y: {angle_y}", True, (255, 255, 255))
 
     # Blit the text surfaces onto the screen
     screen.blit(order_text, (10, 10))
-    screen.blit(points_text, (10, 50))
-    screen.blit(x_text, (10, 90))
-    screen.blit(y_text, (10, 130))
+    screen.blit(integers_text, (10, 50))
+    screen.blit(points_text, (10, 90))
+    screen.blit(x_text, (10, 130))
+    screen.blit(y_text, (10, 170))
 
 
 
 # Initialize Pygame Display Engine
 pygame.init()
+
+#Init trig_tables
+create_tables()
+
 
 fullscreen = False
 # Set up display
@@ -171,9 +186,11 @@ font = pygame.font.Font(None, 36)
 plot_points=None
 
 # Set initial camera position
-camera_distance = 500
-angle_x = -math.pi/2 - math.pi/30
-angle_y = - math.pi/10
+camera_distance = 50
+
+#Starting view angles
+angle_x = -324*math.pi/180
+angle_y = 108*math.pi/180
 
 # Flags to track key state
 key_up = False
@@ -200,8 +217,25 @@ plot_height = 1024
 
 new_scale=1
 
-num_points=1000
+# num_points=12000
+# acceleration=5
+# scale_factor=12
+# z_scaling=10
+# plot_lines=False
+# angle_x = -math.pi/2
+# angle_y = 0
+
+num_points=4000
 acceleration=5
+scale_factor=1.6
+z_scaling=6
+plot_lines=True
+larger_points=False
+
+ordered_factor_cache = np.zeros(num_points + 1, dtype=int)
+
+for i in range(1, num_points + 1):
+    ordered_factor_cache[i] = ordered_factors(i, provide_factor_combinations=False)
 
 # Populate primes for use in the polar plot
 allocate_angles(37)
@@ -239,6 +273,10 @@ while running:
                     screen = pygame.display.set_mode((width, height))
             elif event.key == K_u:
                 autoscale_autocenter = not autoscale_autocenter
+            elif event.key == K_l:
+                plot_lines = not plot_lines
+            elif event.key == K_k:
+                larger_points = not larger_points
         elif event.type == KEYUP:
             if event.key == K_UP:
                 key_up = False
@@ -292,7 +330,8 @@ while running:
 
     if plot_points is None:
         #Recalculate for changes
-        plot_points = generate_ordered_factors_plot(order,num_points)
+        forward_points = generate_ordered_factors_plot(order=order,num_points=num_points,z_scaling=z_scaling)
+        reverse_points=forward_points[::-1]
 
     # A point index counter used for shading
     point_index=0
@@ -303,16 +342,34 @@ while running:
     minx = miny = float('inf')
     maxx = maxy = float('-inf')
 
+    mod_angle=abs(angle_x+math.pi/2)%(2*math.pi)
+    #print (mod_angle)
+    if(mod_angle>=math.pi):
+        #print("reverse")
+        plot_points=reverse_points
+    else:
+        #print("forwards")
+        plot_points=forward_points
+
+
+    #sin_angle_x = fast_sin(angle_x)
+    #sin_angle_y = fast_sin(angle_y)
+    #cos_angle_x = fast_cos(angle_x)
+    #cos_angle_y = fast_cos(angle_y)
+
+    sin_angle_x = math.sin(angle_x)
+    sin_angle_y = math.sin(angle_y)
+    cos_angle_x = math.cos(angle_x)
+    cos_angle_y = math.cos(angle_y)
+
     for point in plot_points:
         point_index=point_index+1
-        rotated_x = point[0] * math.cos(angle_y) - point[2] * 2 * math.sin(angle_y)
-        rotated_z = point[0] * math.sin(angle_y) + point[2] * 2 * math.cos(angle_y)
-        rotated_y = point[1] * math.cos(angle_x) - rotated_z * math.sin(angle_x)
+        rotated_x = point[0] * cos_angle_y - point[2] * sin_angle_y
+        rotated_z = point[0] * sin_angle_y + point[2] * cos_angle_y
+        rotated_y = point[1] * cos_angle_x - rotated_z * sin_angle_x
 
-        #scale = 1
         rotated_x = rotated_x * new_scale
         rotated_y = rotated_y * new_scale
-        #rotated_z = rotated_z / scale
 
         scaled_x = int((rotated_x + width-center_x) / 2)
         scaled_y = int((rotated_y + height-center_y+500) / 2)
@@ -323,15 +380,14 @@ while running:
         miny = min(miny, rotated_y)
         maxy = max(maxy, rotated_y)
 
-
-        # Calculate shading based on the normal vector (assuming light is coming from the positive z direction)
-        #normal = [rotated_x, rotated_y, point[2]]
-        #light_direction = [0, 0, 1]
-        #shading = calculate_shading(normal, light_direction)
-        # Use shading to set color
-        #shade=shading+100
-        #r=g=b=int(shade)
-        #r = restrict(r, 0, 255)
+        # # Calculate shading based on the normal vector (assuming light is coming from the positive z direction)
+        # normal = [rotated_x, rotated_y, point[2]]
+        # light_direction = [0, 0, 1]
+        # shading = calculate_shading(normal, light_direction)
+        # #Use shading to set color
+        # shade=shading+100
+        # r=g=b=int(shade)
+        # r = restrict(r, 0, 255)
 
         b = point_index/100
         g = point[3] #theta
@@ -341,23 +397,25 @@ while running:
         g = restrict(g, 0, 255)
 
         # Draw small and large circles for each point on the screen
-        pygame.draw.circle(screen, (255, g, b), (scaled_x, scaled_y - 300), 1, 1)  # Small circle
-        pygame.draw.circle(screen, (0, g, b), (scaled_x, scaled_y - 300), 3, 1)  # Large circle
+        pygame.draw.circle(screen, (120, g, b), (scaled_x, scaled_y - 300), 1, 1)  # Small circle
+        if(larger_points):
+            pygame.draw.circle(screen, (0, g, b), (scaled_x, scaled_y - 300), 3, 1)  # Large circle
 
-        # Check if there is a last position to draw a line from
-        if last_x != 0 and last_y != 0:
-            # Calculate color values based on the radius of the point
-            r = point[4] % 10 * 10 + 50  # Red component based on the radius
-            g = point[4] / 5  # Green component based on the radius
-            b = point[4] % 13 * 10 + 50  # Blue component based on the radius
+        if(plot_lines==True):
+            # Check if there is a last position to draw a line from
+            if last_x != 0 and last_y != 0:
+                # Calculate color values based on the radius of the point
+                r = point[4] % 10 * 10 + 50  # Red component based on the radius
+                g = point[4] / 5  # Green component based on the radius
+                b = point[4] % 13 * 10 + 50  # Blue component based on the radius
 
-            # Restrict color values to the valid range (0 to 255)
-            r = restrict(r, 0, 255)
-            g = restrict(g, 0, 255)
-            b = restrict(b, 0, 255)
+                # Restrict color values to the valid range (0 to 255)
+                r = restrict(r, 0, 255)
+                g = restrict(g, 0, 255)
+                b = restrict(b, 0, 255)
 
-            # Draw a line connecting the current point to the last point
-            pygame.draw.line(screen, (r, g, b), (last_x, last_y - 300), (scaled_x, scaled_y - 300), 1)
+                # Draw a line connecting the current point to the last point
+                pygame.draw.line(screen, (r, g, b), (last_x, last_y - 300), (scaled_x, scaled_y - 300), 1)
 
         # Store latest point
         last_x=scaled_x
@@ -372,16 +430,16 @@ while running:
     plot_height = maxy - miny
 
     # Calculate the new scale based on the smaller dimension
-    new_scale = (new_scale * acceleration + min(width / plot_width, height / plot_height))/(acceleration+1)
+    new_scale = (new_scale * acceleration + min(width / plot_width, height / plot_height))/(acceleration+1) /scale_factor
 
     # Display the text info
-    display_text(order,num_points,angle_x,angle_y)
+    display_text(order,num_points,len(plot_points),angle_x,angle_y)
 
     # Update display
     pygame.display.flip()
 
     # Cap the frame rate
-    clock.tick(20)
+    clock.tick(5)
 
 # Close pygame engine
 pygame.quit()
