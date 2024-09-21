@@ -129,7 +129,18 @@ By incorporating GML into the pipeline, data scientists can automatically extrac
 
 ## 5. Next Steps
 
-Developing and integrating PPM, GML, and OpenGML into scikit-learn provides a powerful set of tools for analyzing time-series data and complex dynamic systems. However, this is just the beginning. Further work is needed to:
+As OpenGML continues to evolve, we are excited to explore new possibilities for applying **Geometric Musical Language (GML)** and **Phase Pattern Metric (PPM)** to data science workflows. However, it is important to acknowledge that OpenGML is still in its **early stages**, and the core algorithms and APIs needed for full integration into tools like **scikit-learn** are in active development. 
+
+Our current goal is to build out these core algorithms and transform them into user-friendly APIs that can be seamlessly incorporated into existing machine learning workflows. This will require significant effort and development, as the geometric concepts behind OpenGML are complex, and we aim to make them accessible and useful to data scientists across multiple domains.
+
+1. **Algorithm and API Development**: One of the key next steps is the completion of **PPM** and **GML** algorithms and their transformation into efficient, scalable tools. This includes the development of an intuitive API that integrates well with the existing **scikit-learn** ecosystem, providing functionality for tasks such as clustering, pattern recognition, and dimensionality reduction based on geometric principles.
+
+2. **Pre-Algorithmic Phase**: OpenGML is still in the **pre-algorithmic** phase, meaning that the core transformations and geometric computations are being refined, validated, and optimized for practical application. Once these algorithms are stable, we will focus on designing APIs that are easy to implement and work seamlessly within data science workflows.
+
+3. **Collaborative Open Source Development**: Since OpenGML is an **open-source** project, we encourage collaboration from the broader community. The project is actively seeking contributions from developers, data scientists, and researchers to help shape the algorithms, refine the tools, and provide feedback on early-stage functionality. Community involvement is crucial for accelerating the development of the library.
+
+4. **Initial Use of Projection-Based Geometries**: While full scikit-learn integration is still in progress, OpenGML can already be used for **projection-based geometric analysis** in 2D and 3D. Researchers and developers can experiment with these early tools to better understand their datasets and provide feedback that will help guide the development of the core algorithms.
+
 
 - Refine the algorithms used for phase-space transformations.
 - Implement 3D visualizations of geometric patterns using tools such as OpenGL and PyGame.
@@ -137,12 +148,30 @@ Developing and integrating PPM, GML, and OpenGML into scikit-learn provides a po
 
 We encourage data scientists and developers to contribute to this open-source effort and help bring these powerful techniques into the broader machine learning ecosystem. By leveraging the power of nested geometries and phase-space analysis, we can open new possibilities for understanding and modeling complex systems across multiple domains.
 
-## Sponsorship and Support
+## Sponsorship and Gratitude
 
-The development of OpenGML and the integration of PPM and GML into scikit-learn have been made possible through the collaboration of researchers, engineers, and developers. We extend our gratitude to those who have supported this work, and we encourage new supporters to join us in enabling dedicated time for the developers of this project. With your help, we can continue building innovative tools for the data science community.
+The development of OpenGML has reached a critical juncture. Up to this point, the project has been driven by the passion and effort of a small team of dedicated developers, but **no formal sponsorship or external support** has been provided thus far. In order to make significant progress, we are seeking **new supporters** who believe in the potential of OpenGML to transform data science with its geometric algorithms.
+
+With sufficient sponsorship and financial backing, we would be able to dedicate more time and resources to developing the core algorithms, finalizing the API, and completing the integration with scikit-learn. This support would enable the team to focus on the project full-time, allowing us to accelerate development and bring OpenGML to a wider audience of data scientists and researchers.
+
+If you or your organization is interested in supporting this effort, we welcome your involvement. Your sponsorship would be instrumental in helping us push forward with this innovative work, and you would be directly contributing to the creation of new tools for the data science community. In return, supporters will have the opportunity to be closely involved in the development process and benefit from early access to new features as they are implemented.
 
 ## Opportunities for Data Scientists
 
 There are significant opportunities for those wishing to apply these algorithms to their data. Whether you are working with biophysics signals, financial data, or neural recordings, PPM and GML provide a unique approach to feature extraction and analysis that can offer new insights into the hidden structures in your data.
 
 By incorporating these methods into your workflows, you can unlock the potential of geometric feature extraction and improve your machine learning models' performance on complex time-series data.
+
+## References to Key Researchers and Contributions
+
+The development of **PPM**, **GML**, and **OpenGML** has been driven by a team of pioneers in the field of geometric data analysis, notably:
+
+- **Dr. Anirban Bandyopadhyay**: A leading figure in the fields of fractal information theory, prime-number geometry, and nano materials science. His work on **Fractal Information Theory (FIT)** and the **Geometric Musical Language (GML)**, as discussed in his book *Nanobrain*, forms the theoretical foundation of PPM and GML. His research provides the deep mathematical insights that enable the detection of nested geometric structures and invariants in complex systems. And his more recent work on **Self-Operating Mathematical Universe (SOMU)**.
+  
+- **Martin Timms**: An electronics engineer, embedded software engineer, and AI data scientist in training, who implemented OpenGML for both **2D and 3D visualization** and for the **sonification of dynamic time series**. His contributions make it possible for data scientists to *see* and *hear* the geometric structures in their data, opening up new ways of interpreting time-series data in real-time.
+
+These innovations are discussed in various scientific publications, including:
+  
+1. Bandyopadhyay, A., *Nanobrain: The Making of an Artificial Brain from a Time Crystal*, Springer, 2020. This book introduces fractal time and its application in creating artificial brains and cognitive models using geometric and fractal principles.
+2. Bandyopadhyay, A., et al., *Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing*, Nov 2018, which outlines the application of fractal geometry to understanding human consciousness and its geometric underpinnings.
+
