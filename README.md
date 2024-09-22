@@ -9,6 +9,7 @@ originally developed to describe the complex resonances within Microtubules occu
 (SOMU) and, for development of interfaces between biology and AI.
 
 ## Recently added or updated 🆕 ✨
+- [Proposal for OpenGML tools for Data Scientists](PPM%2C%20GML%2C%20and%20OpenGML%20for%20Data%20Scientist.md)[21st September 2024]
 - [Phase Prime Metric (PPM) 3D projection and visualisation](examples/OpenGML_PPM)[11th December 2023] 
 - [The Science of Conference Concurrent Talk by Martin Timms](docs/TSC_Talk.pdf)[28th May,2023]
 - [The development and history of OpenGML](docs/Development_History.md) [8th May, 2023]
