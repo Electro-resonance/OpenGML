@@ -210,4 +210,5 @@ These innovations are discussed in various scientific publications, including:
   
 1. Bandyopadhyay, A., *Nanobrain: The Making of an Artificial Brain from a Time Crystal*, Springer, 2020. This book introduces fractal time and its application in creating artificial brains and cognitive models using geometric and fractal principles.
 2. Bandyopadhyay, A., et al., *Fractal Information Theory (FIT)-Derived Geometric Musical Language (GML) for Brain-Inspired Hypercomputing*, Nov 2018, which outlines the application of fractal geometry to understanding human consciousness and its geometric underpinnings.
+3. Timms, M, *A Universe Based on Prime Numbers: Philosophical, Mathematical, and Physical Implications*, Sept 2024, https://medium.com/@mtimms2/a-universe-based-on-prime-numbers-philosophical-mathematical-and-physical-implications-e640bb31e26a which explore number theory in relation to GML and PPM
 
